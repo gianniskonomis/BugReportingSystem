@@ -1,12 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AppComponent } from './app.component';
-import { BacklogService } from './services/backlog.service';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { routes } from './routes';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule, Routes } from "@angular/router";
+
+import { AppComponent } from "./app.component";
+import { CoreModule } from "./core/core.module";
+
+import { BackLogModule } from "./modules/backlog/backlog.module";
+
+const appRoutes: Routes = [
+  { path: "",  redirectTo: "/bugs", pathMatch: "full" },
+ ];
 
 @NgModule({
   declarations: [
@@ -14,13 +17,13 @@ import { FormsModule } from '@angular/forms';
 
   ],
   imports: [
+    CoreModule,
     BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot(routes)
+    BackLogModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [BacklogService, HttpClientModule ],
+  providers: [ ],
   bootstrap: [AppComponent],
-  exports: [BugComponent]
+  exports: [AppComponent]
 })
 export class AppModule { }
