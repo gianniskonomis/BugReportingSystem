@@ -4,10 +4,9 @@
   </header>
 </div>
 
-<form class="form"
-      (submit)="formSubmit(bugForm)"
-      [formGroup]="bugForm"
-      [class.was-validated]="bugForm.invalid && bugForm.dirty">
+<form #form="ngForm"
+      class="form"
+      [class.was-validated]="form.invalid && form.dirty">
 
   <div class="form-group col-xs-12"
        [ngClass]="{'has-error': title.invalid && title.dirty}">
@@ -75,7 +74,7 @@
     </div>
   </div>
 
-  <div class="form-group col-xs-12 col-md-4"
+  <!--<div class="form-group col-xs-12 col-md-4"
        [ngClass]="{'has-error': !status && status.dirty}">
     <label class="form-control-label">Status</label>
     <br/>
@@ -91,10 +90,11 @@
     <div *ngIf="status.invalid && status.dirty" class="invalid-feedback">
       Field is required
     </div>
-  </div>
+  </div>-->
 
   <button class="btn btn-success pull-right"
-          [disabled]="!bugForm.valid">
+          [disabled]="!form.valid"
+          (click)="formSubmit(form)">
           Submit
   </button>
 
