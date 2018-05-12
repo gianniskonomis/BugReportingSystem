@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bug,BugModel } from '../modules/backlog/bug/bug.model';
+import { Bug,BugModel } from '../bug/bug.model';
 
 @Injectable()
 export class BacklogService {
