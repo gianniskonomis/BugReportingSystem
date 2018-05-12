@@ -9,3 +9,12 @@ export class Bug {
     public createdAt?: string) {}
 
 }
+
+export class BugModel {
+  constructor() {}
+  public priority: number;
+  public title: string;
+  public reporter: string;
+  public status: string;
+  public description: string;
+}
