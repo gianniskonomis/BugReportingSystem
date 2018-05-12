@@ -3,6 +3,7 @@ import { SharedModule } from "./../../shared/shared.module";
 import { RouterModule, Routes } from "@angular/router";
 import { BacklogComponent } from "./backloglist/backlog.component";
 import { BugComponent } from "./bug/bug.component";
+import { BacklogService } from "../../services/backlog.service";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'backlog', pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
+  providers: [BacklogService],
   declarations: [BacklogComponent, BugComponent],
   exports: []
 })
