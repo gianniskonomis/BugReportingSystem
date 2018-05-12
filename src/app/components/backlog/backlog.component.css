@@ -1,0 +1,16 @@
+.add-bug {
+  margin: 20px 0 20px 0;
+}
+
+.backlog th{
+  background-color: #337ab7;
+  color: white;
+}
+
+.sort {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .2ms ease;
+  color: black
+}

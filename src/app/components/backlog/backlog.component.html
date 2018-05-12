@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary add-bug" [routerLink]="'../bug'">New Bug</button>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped backlog">
+        <thead>
+          <tr>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Priority
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Title
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Description
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Reporters
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Status
+              <span class="sort pull-right"
+                    (click)="sort('status','desc')">
+                <i class="fa "></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Created At
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+            <th class="text-center">
+              <span class="sort pull-left">
+                <i class="fa fa-angle-up"></i>
+              </span>
+              Updated At
+              <span class="sort pull-right">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bug of bugs">
+            <td>{{bug.priority}}</td>
+            <td>{{bug.title}}</td>
+            <td>{{bug.description}}</td>
+            <td>{{bug.reporter}}</td>
+            <td>{{bug.status}}</td>
+            <td>{{bug.createdAt | date:'dd/MM/yy, h:mm:ss a'}}</td>
+            <td>{{bug.updatedAt | date:'dd/MM/yy, h:mm:ss a'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
