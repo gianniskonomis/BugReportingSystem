@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
-import { Bug } from './bug.model';
+import { Bug, BugModel } from './bug.model';
+import { Router } from "@angular/router";
+import { BacklogService } from '../../../services/backlog.service';
+
 
 @Component({
   selector: 'app-bug',
@@ -10,12 +13,12 @@ import { Bug } from './bug.model';
 })
 export class BugComponent implements OnInit {
 
-  model: Bug;
+  model: BugModel;
   priorityOptions = [1, 2, 3];
   reporterOptions = ['QA', 'PO', 'DEV'];
   statusOptions = ['Ready for test', 'Done', 'Rejected'];
 
-  constructor() { }
+  constructor(private backlogService: BacklogService, private router: Router) { }
 
   formSubmit(form: NgForm) {
 
@@ -23,11 +26,14 @@ export class BugComponent implements OnInit {
       return;
     }
 
-    console.log(form.value);
+    this.backlogService.saveBug(this.model).subscribe(response => {
+      this.router.navigate(['/backlog']);
+    });
   }
 
   ngOnInit() {
-    this.model = new Bug(null, null, null, null, null, null, null);
+    this.model = new BugModel();
+    this.model.status = undefined;
   }
 
 
