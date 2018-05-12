@@ -15,15 +15,12 @@
               </span>
 
             </th>
-            <th class="text-center">
-              <span class="sort pull-left">
-                <i class="fa fa-angle-up"></i>
-              </span>
-              Title
-              <span class="sort pull-right">
-                <i class="fa fa-angle-down"></i>
-              </span>
+
+            <th (click)="getBugs('title')">Title
+              <i class="pull-right fa" *ngIf="sortBy==='title'" [ngClass]="{'fa-arrow-up': isSortAsc, 'fa-arrow-down':!isSortAsc}" [ngStyle]="{'color': sortBy==='title' ? 'blue' : 'grey'}">
+              </i>
             </th>
+
             <th class="text-center">
               <span class="sort pull-left">
                 <i class="fa fa-angle-up"></i>

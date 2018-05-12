@@ -10,15 +10,23 @@ import { Observable } from 'rxjs/Observable';
 })
 export class BacklogComponent implements OnInit {
 
-  bugs: Bug[];
+  bugs: Array<Bug>;
+  sortBy: string = "title";
+  isSortAsc: boolean = true;
+  pange: number = 0;
+  size: number = 10;
 
   constructor(private backlogService: BacklogService) { }
 
-  getBugs() {
-    this.backlogService.getBugs().subscribe(bugs => this.bugs = bugs);
+  ngOnInit() {
+    this.getBugs(this.sortBy);
   }
 
-  ngOnInit() {
-    this.getBugs();
+  getBugs(sortBy) {
+    this.sortBy = sortBy;
+    this.isSortAsc = !this.isSortAsc;
+    this.backlogService.getBugs(this.sortBy, this.isSortAsc).subscribe(response => {
+      this.bugs = response;
+    });
   }
 }
