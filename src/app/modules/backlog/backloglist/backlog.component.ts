@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BacklogService } from '../../../services/backlog.service';
+import { BacklogService } from '../services/backlog.service';
 import { Bug } from '../bug/bug.model';
 import { Observable } from 'rxjs/Observable';
 

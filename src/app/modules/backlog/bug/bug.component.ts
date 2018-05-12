@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { NgForm } from '@angular/forms';
 import { Bug, BugModel } from './bug.model';
 import { Router } from "@angular/router";
-import { BacklogService } from '../../../services/backlog.service';
+import { BacklogService } from '../services/backlog.service';
 
 
 @Component({
