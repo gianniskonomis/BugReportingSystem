@@ -1,102 +1,115 @@
-<div class="col-xs-12">
-  <header>
-    <h4>New Bug</h4>
-  </header>
-</div>
-
 <form #form="ngForm"
       class="form"
       [class.was-validated]="form.invalid && form.dirty">
 
-  <div class="form-group col-xs-12"
-       [ngClass]="{'has-error': title.invalid && title.dirty}">
-      <label class="form-control-label">Title</label>
-      <input #title="ngModel"
-             class="form-control"
-             type="text"
-             name="title"
-             minlength="3"
-             required
-             [(ngModel)]="model.title">
-      <div *ngIf="title.invalid && title.dirty" class="invalid-feedback">
-        Field is required
-      </div>
-    {{model.title}}
+  <div class="form-header">
+    <header>
+      <h4>New Bug</h4>
+    </header>
   </div>
 
-  <div class="form-group col-xs-12"
-       [ngClass]="{'has-error': description.invalid && description.dirty}">
-    <label class="form-control-label">Description</label>
-    <textarea #description="ngModel"
+  <div class="form-body">
+
+    <div class="row">
+      <div class="form-group col-xs-12"
+           [ngClass]="{'has-error': title.invalid && title.dirty}">
+        <label class="form-control-label">Title</label>
+        <input #title="ngModel"
               class="form-control"
-              name="description"
+              type="text"
+              name="title"
+              minlength="3"
               required
-              rows="5"
-              [(ngModel)]="model.description"></textarea>
-      <div *ngIf="description.invalid && description.dirty" class="invalid-feedback">
-        Field is required
+              [(ngModel)]="model.title">
+        <div *ngIf="title.invalid && title.dirty" class="invalid-feedback">
+          Field is required
+        </div>
       </div>
-    {{model.description}}
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-12"
+           [ngClass]="{'has-error': description.invalid && description.dirty}">
+        <label class="form-control-label">Description</label>
+        <textarea #description="ngModel"
+                  class="form-control"
+                  name="description"
+                  required
+                  rows="5"
+                  [(ngModel)]="model.description"></textarea>
+          <div *ngIf="description.invalid && description.dirty" class="invalid-feedback">
+            Field is required
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-12 col-md-4"
+           [ngClass]="{'has-error': !priority && priority.dirty}">
+        <label class="form-control-label">Priority</label>
+        <select #priority="ngModel"
+                class="form-control"
+                name="priority"
+                [(ngModel)]="model.priority">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let priority of priorityOptions">
+            {{priority}}
+          </option>
+        </select>
+        <div *ngIf="priority.invalid && priority.dirty" class="invalid-feedback">
+          Field is required
+        </div>
+      </div>
+
+      <div class="form-group col-xs-12 col-md-4"
+           [ngClass]="{'has-error': !reporter && reporter.dirty}">
+        <label class="form-control-label">Reporter</label>
+        <br/>
+        <select #reporter="ngModel"
+                class="form-control"
+                name="reporter"
+                [(ngModel)]="model.reporter">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let reporter of reporterOptions">
+            {{reporter}}
+          </option>
+        </select>
+        <div *ngIf="reporter.invalid && reporter.dirty" class="invalid-feedback">
+          Field is required
+        </div>
+      </div>
+
+      <div class="form-group col-xs-12 col-md-4"
+           [ngClass]="{'has-error': !status && status.dirty}">
+        <label class="form-control-label">Status</label>
+        <br/>
+        <select #status="ngModel"
+                class="form-control"
+                name="status"
+                [(ngModel)]="model.status">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let status of statusOptions">
+            {{status}}
+          </option>
+        </select>
+        <div *ngIf="status.invalid && status.dirty" class="invalid-feedback">
+          Field is required
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="form-group col-xs-12 col-md-4"
-       [ngClass]="{'has-error': !priority && priority.dirty}">
-    <label class="form-control-label">Priority</label>
-    <select #priority="ngModel"
-            class="form-control"
-            name="priority"
-            [(ngModel)]="model.priority">
-      <option [ngValue]="null"></option>
-      <option *ngFor="let priority of priorityOptions">
-        {{priority}}
-      </option>
-    </select>
-    <div *ngIf="priority.invalid && priority.dirty" class="invalid-feedback">
-      Field is required
-    </div>
+  <div class="form-footer">
+    <button class="btn btn-success pull-right submitBug"
+            [disabled]="!form.valid"
+            (click)="formSubmit(form)">
+            Submit
+    </button>
+
+    <button class="btn btn-default pull-right"
+            (click)="cancel()">
+            Cancel
+    </button>
   </div>
-
-  <div class="form-group col-xs-12 col-md-4"
-       [ngClass]="{'has-error': !reporter && reporter.dirty}">
-    <label class="form-control-label">Reporter</label>
-    <br/>
-    <select #reporter="ngModel"
-            class="form-control"
-            name="reporter"
-            [(ngModel)]="model.reporter">
-      <option [ngValue]="null"></option>
-      <option *ngFor="let reporter of reporterOptions">
-        {{reporter}}
-      </option>
-    </select>
-    <div *ngIf="reporter.invalid && reporter.dirty" class="invalid-feedback">
-      Field is required
-    </div>
-  </div>
-
-  <!--<div class="form-group col-xs-12 col-md-4"
-       [ngClass]="{'has-error': !status && status.dirty}">
-    <label class="form-control-label">Status</label>
-    <br/>
-    <select #reporter="ngModel"
-            class="form-control"
-            name="status"
-            [(ngModel)]="model.status">
-      <option [ngValue]="null"></option>
-      <option *ngFor="let status of statusOptions">
-        {{status}}
-      </option>
-    </select>
-    <div *ngIf="status.invalid && status.dirty" class="invalid-feedback">
-      Field is required
-    </div>
-  </div>-->
-
-
-  <button class="btn btn-success pull-right"
-          [disabled]="!form.valid"
-          (click)="formSubmit(form)">
-          Submit
-  </button>
-
 </form>

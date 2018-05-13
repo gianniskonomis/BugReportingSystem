@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { Bug, BugModel } from './bug.model';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { BacklogService } from '../services/backlog.service';
 
 
@@ -20,8 +20,11 @@ export class BugComponent implements OnInit {
 
   constructor(private backlogService: BacklogService, private router: Router) { }
 
-  formSubmit(form: NgForm) {
+  cancel() {
+    this.router.navigate(['/backlog']);
+  }
 
+  formSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bug,BugModel } from '../bug/bug.model';
+import { Bug, BugModel } from '../bug/bug.model';
 
 @Injectable()
 export class BacklogService {
@@ -10,20 +10,18 @@ export class BacklogService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Bugs from the server */
-
   getBugs(
     sortBy: string,
     isSortAsc: boolean,
     page: number = 0,
     size: number = 10
   ): Observable<Array<Bug>> {
-    const sortType = isSortAsc ? "asc" : "desc";
+    const sortType = isSortAsc ? 'asc' : 'desc';
 
     let params = new HttpParams();
-    params = params.append("sort", `${sortBy},${sortType}`);
-    params = params.append("page", page.toString());
-    params = params.append("size", size.toString());
+    params = params.append('sort', `${sortBy},${sortType}`);
+    params = params.append('page', page.toString());
+    params = params.append('size', size.toString());
 
     return this.http.get<Array<Bug>>(this.bugEndPoint, { params: params });
   }
