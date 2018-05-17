@@ -26,7 +26,17 @@ export class BacklogService {
     return this.http.get<Array<Bug>>(this.bugEndPoint, { params: params });
   }
 
-  saveBug(model: BugModel): Observable<Bug> {
-    return this.http.post<Bug>(this.bugEndPoint, model);
+  get(id: string): Observable<Bug> {
+    return this.http.get<Bug>(`${this.bugEndPoint}/${id}`);
+  }
+
+  save(model: any): Observable<any> {
+    let result: Observable<Object>;
+    if (model.id) {
+      result = this.http.put(`${this.bugEndPoint}/${model.id}`, model);
+    } else {
+      result = this.http.post(this.bugEndPoint, model);
+    }
+    return result;
   }
 }
