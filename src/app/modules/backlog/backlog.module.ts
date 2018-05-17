@@ -8,7 +8,8 @@ import { BacklogService } from './services/backlog.service';
 export const routes: Routes = [
   { path: '', redirectTo: 'backlog', pathMatch: 'full' },
   { path: 'backlog', component: BacklogComponent },
-  { path: 'bug', component: BugComponent }
+  { path: 'bug-add', component: BugComponent },
+  { path: 'bug-edit/:id', component: BugComponent }
 ];
 
 @NgModule({
