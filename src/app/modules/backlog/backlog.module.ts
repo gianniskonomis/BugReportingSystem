@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BacklogComponent } from './backloglist/backlog.component';
 import { BugComponent } from './bug/bug.component';
 import { BacklogService } from './services/backlog.service';
+import { CommentsComponent } from './comments/comments.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'backlog', pathMatch: 'full' },
@@ -18,7 +19,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [BacklogService],
-  declarations: [BacklogComponent, BugComponent],
+  declarations: [BacklogComponent, BugComponent, CommentsComponent],
   exports: []
 })
 export class BackLogModule {

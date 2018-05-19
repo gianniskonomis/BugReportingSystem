@@ -5,6 +5,7 @@ import { Bug, BugModel } from './bug.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BacklogService } from '../services/backlog.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Comment } from '../comments/comment.model';
 
 @Component({
   selector: 'app-bug',
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class BugComponent implements OnInit {
   model: BugModel;
+  comment: Comment;
   bugForm: FormGroup;
   sub: Subscription;
 
@@ -52,6 +54,12 @@ export class BugComponent implements OnInit {
     required : 'The status is required'
   };
 
+  // Comment Reporter
+  commentReporterFormControl = new FormControl();
+
+  // Commnet Description
+  commentDescriptionFormControl = new FormControl();
+
   // Select Options
   priorityOptions = [1, 2, 3];
   reporterOptions = ['QA', 'PO', 'DEV'];
@@ -62,6 +70,10 @@ export class BugComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  addComment() {
+    this.model.comments.push(this.comment);
+  }
 
   cancel() {
     this.router.navigate(['/backlog']);
@@ -79,14 +91,18 @@ export class BugComponent implements OnInit {
 
   ngOnInit() {
     this.model = new BugModel();
+    this.comment = new Comment();
     this.bugForm = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
       priority: this.priorityFormControl,
       reporter: this.reporterFormControl,
-      status: this.statusFormControl
+      status: this.statusFormControl,
+      commentReporter: this.commentReporterFormControl,
+      commentDescription: this.commentDescriptionFormControl
     });
 
+    // Validations
     this.titleFormControl.valueChanges.subscribe( (value: string) => {
       this.titleFormControlErrorMessage = '';
       if ((this.titleFormControl.touched || this.titleFormControl.dirty) && this.titleFormControl.errors) {
