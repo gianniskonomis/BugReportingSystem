@@ -1,1 +1,13 @@
-<ngb-pagination  [(page)]="page"></ngb-pagination>
+<ul class="pagination">
+  <li class="page-item">
+    <a aria-label="Previous" class="page-link" tabindex="-1" (click)="changePage(false)">
+      <span aria-hidden="true"><</span>
+    </a>
+  </li>
+
+  <li class="page-item ">
+    <a aria-label="Next" class="page-link"  tabindex="-1" (click)="changePage(true)">
+      <span aria-hidden="true">></span>
+    </a>
+  </li>
+</ul>
