@@ -5,6 +5,7 @@ import { BacklogComponent } from "./backloglist/backlog.component";
 import { BugComponent } from "./bug/bug.component";
 import { BacklogService } from "./services/backlog.service";
 import { CommentsComponent } from "./comments/comments.component";
+import { PagerComponent } from "../../shared/pager/pager.component";
 
 export const routes: Routes = [
   { path: "backlog", component: BacklogComponent },
