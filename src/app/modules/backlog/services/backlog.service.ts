@@ -30,6 +30,10 @@ export class BacklogService {
     return this.http.get<Bug>(`${this.bugEndPoint}/${id}`);
   }
 
+  delete(id: string): Observable<Bug> {
+    return this.http.delete<Bug>(`${this.bugEndPoint}/${id}`);
+  }
+
   save(model: any): Observable<any> {
     let result: Observable<Object>;
     if (model.id) {

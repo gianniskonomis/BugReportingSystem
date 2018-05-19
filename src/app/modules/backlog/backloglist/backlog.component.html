@@ -1,3 +1,4 @@
+<app-pager (pageChanged)="onPageChanged($event)" [page]="page" [pageSize]="pageSize"></app-pager>
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-primary add-bug" [routerLink]="['/bug-add']">
@@ -10,80 +11,65 @@
           <tr>
             <th>
             </th>
-            <th class="col-xs-1"
-                (click)="getBugs('priority')"
-                title="Priority">
+            <th class="col-xs-1" (click)="getBugs('priority')" title="Priority">
               <span class="text-center">
                 Priority
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'priority'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'priority'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'priority')}">
               </i>
             </th>
 
-            <th class="col-xs-2"
-                (click)="getBugs('title')">
+            <th class="col-xs-2" (click)="getBugs('title')">
               <span>
                 Title
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'title'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'title'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'title')}">
               </i>
             </th>
 
-            <th class="col-xs-2"
-                (click)="getBugs('description')">
+            <th class="col-xs-2" (click)="getBugs('description')">
               <span>
                 Description
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'description'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'description'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'description')}">
               </i>
             </th>
 
-            <th class="col-xs-2"
-                (click)="getBugs('reporter')">
+            <th class="col-xs-2" (click)="getBugs('reporter')">
               <span>
                 Reporter
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'reporter'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'reporter'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'reporter')}">
               </i>
             </th>
 
-            <th class="col-xs-1"
-                (click)="getBugs('status')">
+            <th class="col-xs-1" (click)="getBugs('status')">
               <span>
                 Status
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'status'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'status'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'status')}">
               </i>
             </th>
 
-            <th class="col-xs-2"
-                (click)="getBugs('createdAt')">
+            <th class="col-xs-2" (click)="getBugs('createdAt')">
               <span>
                 Created At
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'createdAt'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'createdAt'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'createdAt')}">
               </i>
             </th>
 
-            <th class="col-xs-2"
-                (click)="getBugs('updatedAt')">
+            <th class="col-xs-2" (click)="getBugs('updatedAt')">
               <span>
                 Updated At
               </span>
-              <i class="pull-right fa"
-                 [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'updatedAt'),
+              <i class="pull-right fa" [ngClass]="{'fa-angle-up': isSortAsc && (sortBy == 'updatedAt'),
                              'fa-angle-down': !isSortAsc && (sortBy == 'updatedAt')}">
               </i>
             </th>
@@ -91,15 +77,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let bug of bugs">
-            <td>  
-              <div class="add-bug pl-20 pr-20" [routerLink]="['/bug-edit',bug.id]">
-                <i class="fa fa-pencil-square-o fa-lg text-primary"></i>
-              </div>
+            <td class="col-xs-2">
+              <button class="btn btn-primary add-bug" [routerLink]="['/bug-edit',bug.id]">
+                <i class="fa fa-pencil"></i></button>
+
+              <button class="btn btn-danger" (click)="removeBug(bug.id)">
+                  <i class="fa fa-times"></i></button>
             </td>
             <td class="col-xs-1">{{bug.priority}}</td>
             <td class="col-xs-2">{{bug.title}}</td>
             <td class="col-xs-2">{{bug.description}}</td>
-            <td class="col-xs-2">{{bug.reporter}}</td>
+            <td class="col-xs-1">{{bug.reporter}}</td>
             <td class="col-xs-1">{{bug.status}}</td>
             <td class="col-xs-2">{{bug.createdAt | date:'dd/MM/yy, h:mm:ss a'}}</td>
             <td class="col-xs-2">{{bug.updatedAt | date:'dd/MM/yy, h:mm:ss a'}}</td>
