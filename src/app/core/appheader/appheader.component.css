@@ -1,0 +1,12 @@
+.bg-blue {
+    background-color: #337ab7;
+    border-radius: 0;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand i {
+    padding-right: 5px;
+}
