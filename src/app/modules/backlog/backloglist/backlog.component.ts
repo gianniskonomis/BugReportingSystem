@@ -48,4 +48,10 @@ export class BacklogComponent implements OnInit {
     }
     this.resolveBugs();
   }
+
+  removeBug(id: string) {
+    this.backlogService.delete(id).subscribe(response => {
+      this.resolveBugs();
+    });
+  }
 }
