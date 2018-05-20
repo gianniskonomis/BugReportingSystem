@@ -14,7 +14,7 @@
                     type="text" 
                     formControlName="Priority"
                     name="Priority" 
-                    [(ngModel)]="model.priority">
+                    [(ngModel)]=".priority">
 
               <option class="text-muted" [ngValue]="null" disabled selected hidden>Priority</option>
               <option *ngFor="let priority of priorityOptions">
@@ -60,7 +60,13 @@
         <!-- Status -->
 
         <div class="form-group col-xs-1">
-          <button class="btn btn-default">
+          <button class="btn btn-default btn-sm"
+                  (click)="executeSearch({
+                              priority: priority,
+                              title: title,
+                              reporter: reporter,
+                              status: status
+                          })">
             <i class="fa fa-search"></i> 
           </button>
         </div>

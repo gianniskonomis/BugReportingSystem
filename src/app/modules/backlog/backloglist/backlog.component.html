@@ -6,7 +6,9 @@
 
       <!-- Advanced Search -->
       <div class="col-xs-9">
-        <app-advanced-search></app-advanced-search>
+        <app-advanced-search (initiateAdvancedSearch)="onAdvancedSearchStarted($event)">
+
+        </app-advanced-search>
       </div>
       <!-- /Advanced Search -->
 

@@ -68,13 +68,19 @@ export class BacklogComponent implements OnInit {
     this.resolveBugs();
   }
 
+  onAdvancedSearchStarted(params) {
+    this.titleFilter = params.title;
+    this.priorityFilter = params.priority;
+    this.reporterFilter = params.reporter;
+    this.statusFilter = params.status;
+
+    this.resolveBugs();
+  }
+
   removeBug(id: string) {
     this.backlogService.delete(id).subscribe(response => {
       this.resolveBugs();
     });
   }
 
-  search() {
-    this.resolveBugs();
-  }
 }
