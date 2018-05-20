@@ -28,7 +28,7 @@ import { Observable } from "rxjs/Observable";
 })
 
 export class BugComponent
-  implements OnInit, CanDeactivate<CanComponentDeactivate> {
+  implements OnInit, CanComponentDeactivate {
 
   @Output() comments: Comment[];
 
@@ -101,13 +101,8 @@ export class BugComponent
     private toastr: ToastrService
   ) {}
 
-  canDeactivate(
-    component: CanComponentDeactivate,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    return this.bugForm.valid;
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    return !this.bugForm.dirty;
   }
 
   addComment() {
@@ -125,7 +120,6 @@ export class BugComponent
   }
 
   cancel() {
-    debugger;
     this.router.navigate(["/backlog"]);
   }
 
@@ -135,7 +129,7 @@ export class BugComponent
     }
 
     this.backlogService.save(this.model).subscribe(response => {
-      //this.toastr.success(`Bug Saved`);
+      this.toastr.success(`Bug Saved`);
       this.router.navigate(["/backlog"]);
     });
   }

@@ -12,12 +12,12 @@ import { CanDeactivateGuard } from "../../shared/can-deactivate-guard.service";
 export const routes: Routes = [
   { path: "backlog", component: BacklogComponent },
   { path: "bug-add", component: BugComponent, canDeactivate: [CanDeactivateGuard] },
-  { path: "bug-edit/:id", component: BugComponent, canDeactivate: [CanDeactivateGuard] }
+  { path: "bug-edit/:id", component: BugComponent , canDeactivate: [CanDeactivateGuard] }
 ];
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild(routes)],
-  providers: [BacklogService],
+  providers: [BacklogService, CanDeactivateGuard],
   declarations: [BacklogComponent, BugComponent, CommentsComponent],
   exports: []
 })
