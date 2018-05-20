@@ -16,6 +16,11 @@ export class BacklogComponent implements OnInit {
   page: number;
   size: number;
 
+  titleFilter: string;
+  priorityFilter: string;
+  reporterFilter: string;
+  statusFilter: string;
+
   constructor(private backlogService: BacklogService, private router: Router) {}
 
   ngOnInit() {
@@ -34,7 +39,16 @@ export class BacklogComponent implements OnInit {
 
   private resolveBugs() {
     this.backlogService
-      .getBugs(this.sortBy, this.isSortAsc, this.page, this.size)
+      .getBugs(
+        this.sortBy,
+        this.isSortAsc,
+        this.page,
+        this.size,
+        this.titleFilter,
+        this.priorityFilter,
+        this.reporterFilter,
+        this.statusFilter
+      )
       .subscribe(response => {
         this.bugs = response;
       });
@@ -49,7 +63,7 @@ export class BacklogComponent implements OnInit {
     this.resolveBugs();
   }
 
-  onPageSizeChanged(pageSizeValue){
+  onPageSizeChanged(pageSizeValue) {
     this.size = pageSizeValue;
     this.resolveBugs();
   }
@@ -58,5 +72,9 @@ export class BacklogComponent implements OnInit {
     this.backlogService.delete(id).subscribe(response => {
       this.resolveBugs();
     });
+  }
+
+  search() {
+    this.resolveBugs();
   }
 }

@@ -8,13 +8,17 @@ import { environment } from "../../../../environments/environment";
 export class BacklogService {
   private bugEndPoint = environment.bugEndPoint;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBugs(
     sortBy: string,
     isSortAsc: boolean,
     page: number = 0,
-    size: number = 10
+    size: number = 10,
+    title: string = null,
+    priority: string = null,
+    reporter: string = null,
+    status: string = null
   ): Observable<Array<BugModel>> {
     const sortType = isSortAsc ? "asc" : "desc";
 
@@ -23,6 +27,19 @@ export class BacklogService {
     params = params.append("page", page.toString());
     params = params.append("size", size.toString());
 
+    if (title) {
+      params = params.append("title", title.toString());
+    }
+    if (priority) {
+      params = params.append("priority", priority);
+    }
+    if (reporter) {
+      params = params.append("reporter", reporter);
+    }
+
+    if (status) {
+      params = params.append("status", status.toString());
+    }
     return this.http.get<Array<BugModel>>(this.bugEndPoint, { params: params });
   }
 
