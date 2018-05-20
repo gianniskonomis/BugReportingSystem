@@ -3,6 +3,7 @@ import { BacklogService } from "../services/backlog.service";
 import { BugModel } from "../bug/bug.model";
 import { Observable } from "rxjs/Observable";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-backlog",
@@ -21,7 +22,7 @@ export class BacklogComponent implements OnInit {
   reporterFilter: string;
   statusFilter: string;
 
-  constructor(private backlogService: BacklogService, private router: Router) {}
+  constructor(private backlogService: BacklogService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.sortBy = "title";
@@ -79,6 +80,7 @@ export class BacklogComponent implements OnInit {
   removeBug(id: string) {
     this.backlogService.delete(id).subscribe(response => {
       this.resolveBugs();
+      this.toastr.success(`Bug Deleted`);
     });
   }
 
