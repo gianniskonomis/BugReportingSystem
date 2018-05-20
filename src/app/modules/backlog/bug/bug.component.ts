@@ -135,7 +135,7 @@ export class BugComponent
 
   ngOnInit() {
     this.model = new BugModel();
-    this.comment = new Comment();
+    this.comment = new Comment(undefined, undefined);
     this.bugForm = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
@@ -146,6 +146,26 @@ export class BugComponent
     this.commentForm = new FormGroup({
       commentReporter: this.commentReporterFormControl,
       commentDescription: this.commentDescriptionFormControl
+    });
+
+    this.sub = this.route.params.subscribe(params => {
+      const id = params["id"];
+      if (id) {
+        this.backlogService.get(id).subscribe(
+          (bug: BugModel) => {
+            this.model = bug;
+          },
+          err => {
+            this.toastr.error(
+              `Bug with id '${id}' not found, returning to list`
+            );
+            this.cancel();
+          }
+        );
+      } else {
+        this.model = new BugModel();
+        this.model.comments = this.model.comments || [];
+      }
     });
 
     // Validations
@@ -208,25 +228,6 @@ export class BugComponent
           this.statusFormControlErrorMessage = Object.keys(this.statusFormControl.errors)
           .map(c => this.statusFormControlValidationMessages[c])
           .join(" ");
-      }
-    });
-
-    this.sub = this.route.params.subscribe(params => {
-      const id = params["id"];
-      if (id) {
-        this.backlogService.get(id).subscribe(
-          (bug: BugModel) => {
-            this.model = bug;
-          },
-          err => {
-            this.toastr.error(
-              `Bug with id '${id}' not found, returning to list`
-            );
-            this.cancel();
-          }
-        );
-      } else {
-        this.model = new BugModel();
       }
     });
   }
