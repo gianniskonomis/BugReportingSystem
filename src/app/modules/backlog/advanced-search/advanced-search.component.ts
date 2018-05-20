@@ -21,6 +21,7 @@ export class AdvancedSearchComponent implements OnInit {
 
   ngOnInit() {}
 
+
   executeSearch() {
     this.initiateAdvancedSearch.emit({
       priority: this.priority,
