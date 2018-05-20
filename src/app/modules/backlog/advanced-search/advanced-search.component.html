@@ -14,7 +14,7 @@
                     type="text" 
                     formControlName="Priority"
                     name="Priority" 
-                    [(ngModel)]=".priority">
+                    [(ngModel)]="priority">
 
               <option class="text-muted" [ngValue]="null" disabled selected hidden>Priority</option>
               <option *ngFor="let priority of priorityOptions">
@@ -31,7 +31,7 @@
                  type="text" 
                  formControlName="title"
                  name="title" 
-                 [(ngModel)]="model.title">
+                 [(ngModel)]="title">
         </div>
         <!-- /Title -->
 
@@ -42,7 +42,7 @@
                   type="text" 
                   formControlName="Reporter"
                   name="Reporter" 
-                  [(ngModel)]="model.reporter">
+                  [(ngModel)]="reporter">
         </select>
         </div>
         <!-- /Reporter -->
@@ -54,7 +54,7 @@
                   type="text" 
                   formControlName="Status" 
                   name="Status" 
-                  [(ngModel)]="model.status">
+                  [(ngModel)]="status">
           </select>
         </div>
         <!-- Status -->
