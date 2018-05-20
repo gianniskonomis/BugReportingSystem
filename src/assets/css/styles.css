@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn, .form-control {
+    border-radius: 0;
+}
+
+.navbar {
+    box-shadow: 0 0 10px #7b7b7b;
+    border: 0;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.pr-5 {
+    padding-right: 5px;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
+.soft-black {
+    color: rgb(100, 100, 100);
+}
+
+.text-white {
+    color: white !important;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}

@@ -23,12 +23,3 @@ button {
   width: 100%;
 }
 
-.mt-25 {
-  margin-top: 25px;
-}
-
-.btn,
-.form-control {
-  border-radius: 0;
-}
-

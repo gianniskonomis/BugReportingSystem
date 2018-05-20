@@ -14,7 +14,31 @@ button {
   cursor: pointer;
 }
 
-.backlog th {
+.table {
+  /* box-shadow: 0 0px 8px #ababab; */
+  box-shadow: 0 0 10px #7b7b7b;
+}
+
+.backlog.minimal thead tr{
+  border-bottom: 2px solid #d7e3ec;
+}
+
+.backlog.minimal thead tr i{
+  color: #337ab7;
+}
+
+.backlog.minimal th,
+.backlog.minimal td 
+.backlog.no-borders th,
+.backlog.no-borders td {
+  border: 0 !important;
+}
+
+.backlog tbody tr {
+  border: 1px solid gainsboro;
+}
+
+.backlog.blue th {
   background-color: #337ab7;
   color: white;
   cursor: pointer;
@@ -24,7 +48,7 @@ button {
   -moz-transition: all .2s ease;
 }
 
-.backlog th:hover {
+.backlog.blue th:hover {
   background-color: #286090;
 }
 
