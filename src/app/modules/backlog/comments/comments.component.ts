@@ -10,12 +10,10 @@ import { Comment } from './comment.model';
 export class CommentsComponent implements OnInit {
 
   @Input() comments: Comment[];
-  myComments: Comment[];
 
   constructor() { }
 
   ngOnInit() {
-    this.myComments = this.comments;
   }
 
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { Bug, BugModel } from './bug.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, OutletContext } from '@angular/router';
 import { BacklogService } from '../services/backlog.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Comment } from '../comments/comment.model';
@@ -13,9 +13,12 @@ import { Comment } from '../comments/comment.model';
   styleUrls: ['./bug.component.css']
 })
 export class BugComponent implements OnInit {
+
+  @Output() comments: Comment[];
   model: BugModel;
   comment: Comment;
   bugForm: FormGroup;
+  commentForm: FormGroup;
   sub: Subscription;
 
   // title
@@ -71,8 +74,11 @@ export class BugComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  addComment() {
-    this.model.comments.push(this.comment);
+  addComment(comment) {
+    if (comment.reporter || comment.description) {
+      return;
+    }
+    this.model.comments.push(comment);
   }
 
   cancel() {
@@ -98,6 +104,8 @@ export class BugComponent implements OnInit {
       priority: this.priorityFormControl,
       reporter: this.reporterFormControl,
       status: this.statusFormControl,
+    });
+    this.commentForm = new FormGroup({
       commentReporter: this.commentReporterFormControl,
       commentDescription: this.commentDescriptionFormControl
     });

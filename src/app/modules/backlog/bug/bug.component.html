@@ -1,148 +1,155 @@
-<form class="form"
-      (submit)="formSubmit(bugForm)"
-      [formGroup]="bugForm"
-      [class.was-validated]="bugForm.invalid && bugForm.dirty">
+<div class="row">
 
-  <div class="form-header">
-    <header>
-      <h4>New Bug</h4>
-    </header>
-  </div>
+  <div class="col-xs-12 col-md-6">
+    <form class="form"
+          (submit)="formSubmit(bugForm)"
+          [formGroup]="bugForm"
+          [class.was-validated]="bugForm.invalid && bugForm.dirty">
 
-  <div class="form-body">
+      <div class="form-body">
 
-    <div class="row">
-      <div class="form-group col-xs-12"
-           [ngClass]="{'has-error': titleFormControlErrorMessage}">
-        <label class="form-control-label">Title :</label>
-        <input class="form-control"
-               type="text"
-               formControlName="title"
-               name="title"
-               [(ngModel)]="model.title">
-        <div *ngIf="titleFormControlErrorMessage" class="invalid-feedback">
-          {{titleFormControlErrorMessage}}
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-xs-12"
-           [ngClass]="{'has-error': descriptionFormControlErrorMessage}">
-        <label class="form-control-label">Description :</label>
-        <textarea class="form-control"
-                  name="description"
-                  formControlName="description"
-                  required
-                  rows="5"
-                  [(ngModel)]="model.description"></textarea>
-        <div *ngIf="descriptionFormControlErrorMessage" class="invalid-feedback">
-          {{descriptionFormControlErrorMessage}}
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-xs-12 col-md-4"
-           [ngClass]="{'has-error': priorityFormControlErrorMessage}">
-        <label class="form-control-label">Priority :</label>
-        <select class="form-control"
-                name="priority"
-                formControlName="priority"
-                [(ngModel)]="model.priority">
-          <option [ngValue]="null"></option>
-          <option *ngFor="let priority of priorityOptions">
-            {{priority}}
-          </option>
-        </select>
-        <div *ngIf="priorityFormControlErrorMessage" class="invalid-feedback">
-          {{priorityFormControlErrorMessage}}
-        </div>
-      </div>
-
-      <div class="form-group col-xs-12 col-md-4"
-           [ngClass]="{'has-error': reporterFormControlErrorMessage}">
-        <label class="form-control-label">Reporter :</label>
-        <br/>
-        <select class="form-control"
-                name="reporter"
-                formControlName="reporter"
-                [(ngModel)]="model.reporter">
-          <option [ngValue]="null"></option>
-          <option *ngFor="let reporter of reporterOptions">
-            {{reporter}}
-          </option>
-        </select>
-        <div *ngIf="reporterFormControlErrorMessage" class="invalid-feedback">
-          {{reporterFormControlErrorMessage}}
-        </div>
-      </div>
-
-      <div class="form-group col-xs-12 col-md-4"
-           [ngClass]="{'has-error': statusFormControlErrorMessage}">
-        <label class="form-control-label">Status :</label>
-        <br/>
-        <select class="form-control"
-                name="status"
-                formControlName="status"
-                [(ngModel)]="model.status">
-          <option [ngValue]="null"></option>
-          <option *ngFor="let status of statusOptions">
-            {{status}}
-          </option>
-        </select>
-        <div *ngIf="statusFormControlErrorMessage" class="invalid-feedback">
-          {{statusFormControlErrorMessage}}
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-        <div class="form-group col-xs-12 col-md-4">
-          <label class="form-control-label">Reporter Name :</label>
-          <input class="form-control"
-                 type="text"
-                 formControlName="commentReporter"
-                 name="commentReporter"
-                 [(ngModel)]="comment.reporter">
-        </div>
-
-        <div class="form-group col-xs-12 col-md-8">
-            <label class="form-control-label">Comment :</label>
+        <div class="row">
+          <div class="form-group col-xs-12"
+               [ngClass]="{'has-error': titleFormControlErrorMessage}">
+            <label class="form-control-label">Title :</label>
             <input class="form-control"
                    type="text"
-                   formControlName="commentDescription"
-                   name="commentDescription"
-                   [(ngModel)]="comment.description"/>
+                   formControlName="title"
+                   name="title"
+                   [(ngModel)]="model.title">
+            <div *ngIf="titleFormControlErrorMessage" class="invalid-feedback">
+              {{titleFormControlErrorMessage}}
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-1">
-            <button class="btn btn-primary mt-25"
-                    (click)="addComment()">
-              <i class="fa fa-plus"></i>
-            </button>
+        <div class="row">
+          <div class="form-group col-xs-12"
+               [ngClass]="{'has-error': descriptionFormControlErrorMessage}">
+            <label class="form-control-label">Description :</label>
+            <textarea class="form-control"
+                      name="description"
+                      formControlName="description"
+                      required
+                      rows="5"
+                      [(ngModel)]="model.description"></textarea>
+            <div *ngIf="descriptionFormControlErrorMessage" class="invalid-feedback">
+              {{descriptionFormControlErrorMessage}}
+            </div>
+          </div>
         </div>
 
-        <!--<pre>
-          {{model | json}}
-          {{comment | json}}
-        </pre>-->
-    </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-md-4"
+               [ngClass]="{'has-error': priorityFormControlErrorMessage}">
+            <label class="form-control-label">Priority :</label>
+            <select class="form-control"
+                    name="priority"
+                    formControlName="priority"
+                    [(ngModel)]="model.priority">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let priority of priorityOptions">
+                {{priority}}
+              </option>
+            </select>
+            <div *ngIf="priorityFormControlErrorMessage" class="invalid-feedback">
+              {{priorityFormControlErrorMessage}}
+            </div>
+          </div>
+
+          <div class="form-group col-xs-12 col-md-4"
+               [ngClass]="{'has-error': reporterFormControlErrorMessage}">
+            <label class="form-control-label">Reporter :</label>
+            <br/>
+            <select class="form-control"
+                    name="reporter"
+                    formControlName="reporter"
+                    [(ngModel)]="model.reporter">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let reporter of reporterOptions">
+                {{reporter}}
+              </option>
+            </select>
+            <div *ngIf="reporterFormControlErrorMessage" class="invalid-feedback">
+              {{reporterFormControlErrorMessage}}
+            </div>
+          </div>
+
+          <div class="form-group col-xs-12 col-md-4"
+               [ngClass]="{'has-error': statusFormControlErrorMessage}">
+            <label class="form-control-label">Status :</label>
+            <br/>
+            <select class="form-control"
+                    name="status"
+                    formControlName="status"
+                    [(ngModel)]="model.status">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let status of statusOptions">
+                {{status}}
+              </option>
+            </select>
+            <div *ngIf="statusFormControlErrorMessage" class="invalid-feedback">
+              {{statusFormControlErrorMessage}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button class="btn btn-success pull-right submitBug"
+                [disabled]="!bugForm.valid"
+                type="submit">
+                Submit
+        </button>
+
+        <button class="btn btn-default pull-right"
+                (click)="cancel()">
+                Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+
+    <form class="form"
+          [formGroup]="commentForm">
+
+      <div class="row">
+          <div class="form-group col-xs-12">
+            <label class="form-control-label">Reporter Name :</label>
+            <input class="form-control"
+                    type="text"
+                    formControlName="commentReporter"
+                    name="commentReporter"
+                    [(ngModel)]="comment.reporter">
+          </div>
+
+          <div class="form-group col-xs-10">
+              <label class="form-control-label">Comment :</label>
+              <textarea class="form-control"
+                        formControlName="commentDescription"
+                        rows="3"
+                        name="commentDescription"
+                        [(ngModel)]="comment.description"></textarea>
+          </div>
+
+          <div class="col-md-2">
+              <button class="btn btn-primary mt-25"
+                      (click)="addComment(comment)">
+                <i class="fa fa-plus"></i>
+              </button>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <app-comments [comments]="model.comments"></app-comments>
+        </div>
+      </div>
+
+    </form>
 
   </div>
 
-  <div class="form-footer">
-    <button class="btn btn-success pull-right submitBug"
-            [disabled]="!bugForm.valid"
-            type="submit">
-            Submit
-    </button>
-
-    <button class="btn btn-default pull-right"
-            (click)="cancel()">
-            Cancel
-    </button>
-  </div>
-
-  <app-comments [comments]="model.comments"></app-comments>
-</form>
+</div>
