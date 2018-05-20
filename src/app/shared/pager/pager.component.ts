@@ -22,6 +22,11 @@ export class PagerComponent implements OnInit {
   }
 
   onPageSizeValueChange(pageSizeValue) {
+
+    if (!pageSizeValue) {
+      return;
+    }
+
     this.pageSizeChanged.emit(pageSizeValue);
   }
 
