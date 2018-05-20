@@ -9,6 +9,7 @@
 
         <!-- Priority -->
         <div class="form-group col-xs-2">
+            <small> Priority </small>
             <select class="form-control"
                     placeholder="Priority"
                     type="text"
@@ -25,8 +26,9 @@
 
         <!-- Title -->
         <div class="form-group col-xs-3">
+            <small> Title </small>
+
           <input class="form-control"
-                 placeholder="Title"
                  type="text"
                  name="title"
                  [(ngModel)]="title">
@@ -36,6 +38,7 @@
         <!-- Reporter -->
 
         <div class="form-group col-xs-3">
+          <small>Reporter</small>
           <select class="form-control"
                   placeholder="Reporter"
                   type="text"
@@ -51,6 +54,7 @@
 
         <!-- Status -->
         <div class="form-group col-xs-3">
+          <small>Status</small> 
           <select class="form-control"
                   placeholder="Status"
                   type="text"
@@ -66,7 +70,7 @@
         <!-- Status -->
 
         <div class="form-group col-xs-1">
-          <button class="btn btn-default btn-sm"
+          <button class="btn btn-default btn-sm mt-20"
                   (click)="executeSearch()">
             <i class="fa fa-search"></i>
           </button>
