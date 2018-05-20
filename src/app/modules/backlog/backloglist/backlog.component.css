@@ -16,7 +16,7 @@ button {
 
 .table {
   /* box-shadow: 0 0px 8px #ababab; */
-  box-shadow: 0 0 10px #7b7b7b;
+  box-shadow: 0 0 5px #ababab;
 }
 
 .backlog.minimal thead tr{

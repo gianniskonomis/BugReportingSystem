@@ -1,5 +1,3 @@
 export class Comment {
-  public reporter: string;
-  public description: string;
-  constructor() {}
+  constructor( public reporter: string, public description: string) {}
 }

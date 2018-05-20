@@ -6,6 +6,12 @@ import { PagerComponent } from "./pager/pager.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ModalComponent } from "./modal/modal.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {
+  HttpClientModule,
+  HttpInterceptor,
+  HTTP_INTERCEPTORS
+} from "@angular/common/http";
+import { AuthenticationInterceptor } from "./authenticationInterceptor";
 
 @NgModule({
   imports: [
@@ -13,6 +19,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
@@ -27,7 +34,15 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ReactiveFormsModule,
     PagerComponent,
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    }
   ]
 })
 export class SharedModule {}

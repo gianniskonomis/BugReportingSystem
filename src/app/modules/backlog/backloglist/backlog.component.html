@@ -3,7 +3,11 @@
   <div class="col-md-12 pt-10 pb-10">
     
     <!-- Pager -->
-    <app-pager (pageChanged)="onPageChanged($event)" [page]="page" [pageSize]="pageSize"></app-pager>
+    <app-pager (pageChanged)="onPageChanged($event)" 
+               (pageSizeChanged)="onPageSizeChanged($event)"
+               [page]="page" 
+               [pageSize]="pageSize">
+    </app-pager>
     <!-- /Pager -->
 
   </div>

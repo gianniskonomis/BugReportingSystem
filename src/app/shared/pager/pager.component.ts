@@ -10,6 +10,7 @@ export class PagerComponent implements OnInit {
   @Input() page: number;
   @Input() pageSize: number;
   @Output() pageChanged = new EventEmitter();
+  @Output() pageSizeChanged = new EventEmitter();
 
   ngOnInit() {}
 
@@ -19,4 +20,15 @@ export class PagerComponent implements OnInit {
     }
     this.pageChanged.emit(forward);
   }
+
+  onPageSizeValueChange(pageSizeValue) {
+
+    if (!pageSizeValue) {
+      return;
+    }
+
+    this.pageSizeChanged.emit(pageSizeValue);
+  }
+
+  
 }
