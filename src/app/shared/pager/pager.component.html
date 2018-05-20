@@ -4,13 +4,14 @@
     <div class="pull-left mr-15">
       <span class="pr-5">Page Size:</span>
       <select class="form-control page-size"
-              [(ngModel)]="pageSize" 
-              (ngModelChange)="getProperPageSizeBugs($event)"
+              [(ngModel)]="pageSizeValue" 
+              (ngModelChange)="onPageSizeValueChange(pageSizeValue)"
               name="pageSize" 
               id="pageSize">
-          <option value=""></option>
-          <option value="5">5</option>
-          <option value="10">10</option>
+          <option [ngValue]="null"></option>
+          <option [ngValue]="5">5</option>
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="15">15</option>
       </select>
     </div>
 

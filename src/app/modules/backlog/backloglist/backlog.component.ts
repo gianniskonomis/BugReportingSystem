@@ -49,6 +49,11 @@ export class BacklogComponent implements OnInit {
     this.resolveBugs();
   }
 
+  onPageSizeChanged(pageSizeValue){
+    this.size = pageSizeValue;
+    this.resolveBugs();
+  }
+
   removeBug(id: string) {
     this.backlogService.delete(id).subscribe(response => {
       this.resolveBugs();
