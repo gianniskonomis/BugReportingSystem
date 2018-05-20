@@ -10,15 +10,6 @@ button {
 }
 
 .form-body {
-  padding: 15px;
-  border: 1px solid #eeeeee;
-  float: left;
-  width: 100%;
-}
-
-.form-header, .form-footer {
-  padding: 15px;
-  background-color: #eeeeee;
   float: left;
   width: 100%;
 }

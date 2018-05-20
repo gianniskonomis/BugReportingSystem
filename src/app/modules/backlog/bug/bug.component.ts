@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -26,12 +26,16 @@ import { Observable } from "rxjs/Observable";
   templateUrl: "./bug.component.html",
   styleUrls: ["./bug.component.css"]
 })
+
 export class BugComponent
   implements OnInit, CanDeactivate<CanComponentDeactivate> {
+
+  @Output() comments: Comment[];
 
   model: BugModel;
   comment: Comment;
   bugForm: FormGroup;
+  commentForm: FormGroup;
   sub: Subscription;
 
   // title
@@ -46,21 +50,27 @@ export class BugComponent
   };
 
   // description
-  descriptionFormControl = new FormControl("", Validators.required);
+  descriptionFormControl = new FormControl("",
+   Validators.required
+  );
   descriptionFormControlErrorMessage = "";
   descriptionFormControlValidationMessages = {
     required: "The description is required"
   };
 
   // priority
-  priorityFormControl = new FormControl("", Validators.required);
+  priorityFormControl = new FormControl("",
+    Validators.required
+  );
   priorityFormControlErrorMessage = "";
   priorityFormControlValidationMessages = {
     required: "The priority is required"
   };
 
   // reporter
-  reporterFormControl = new FormControl("", Validators.required);
+  reporterFormControl = new FormControl("",
+    Validators.required
+  );
   reporterFormControlErrorMessage = "";
   reporterFormControlValidationMessages = {
     required: "The reporter is required"
@@ -101,7 +111,17 @@ export class BugComponent
   }
 
   addComment() {
-    this.model.comments.push(this.comment);
+    if (!this.comment.reporter || !this.comment.description) {
+      this.toastr.warning(
+        `You didn't add a comment`
+      );
+      return;
+    } else {
+      this.model.comments.push(this.comment);
+      this.comments = this.model.comments;
+      this.comment.reporter = undefined;
+      this.comment.description = undefined;
+    }
   }
 
   cancel() {
@@ -129,6 +149,8 @@ export class BugComponent
       priority: this.priorityFormControl,
       reporter: this.reporterFormControl,
       status: this.statusFormControl,
+    });
+    this.commentForm = new FormGroup({
       commentReporter: this.commentReporterFormControl,
       commentDescription: this.commentDescriptionFormControl
     });
@@ -136,13 +158,10 @@ export class BugComponent
     // Validations
     this.titleFormControl.valueChanges.subscribe((value: string) => {
       this.titleFormControlErrorMessage = "";
-      if (
-        (this.titleFormControl.touched || this.titleFormControl.dirty) &&
-        this.titleFormControl.errors
-      ) {
-        this.titleFormControlErrorMessage = Object.keys(
+      if ((this.titleFormControl.touched || this.titleFormControl.dirty) &&
           this.titleFormControl.errors
-        )
+      ) {
+          this.titleFormControlErrorMessage = Object.keys(this.titleFormControl.errors)
           .map(c => this.titleFormControlValidationMessages[c])
           .join(" ");
       }
@@ -150,14 +169,10 @@ export class BugComponent
 
     this.descriptionFormControl.valueChanges.subscribe((value: string) => {
       this.descriptionFormControlErrorMessage = "";
-      if (
-        (this.descriptionFormControl.touched ||
-          this.descriptionFormControl.dirty) &&
-        this.descriptionFormControl.errors
-      ) {
-        this.descriptionFormControlErrorMessage = Object.keys(
+      if ((this.descriptionFormControl.touched || this.descriptionFormControl.dirty) &&
           this.descriptionFormControl.errors
-        )
+      ) {
+          this.descriptionFormControlErrorMessage = Object.keys(this.descriptionFormControl.errors)
           .map(c => this.descriptionFormControlValidationMessages[c])
           .join(" ");
       }
@@ -165,13 +180,10 @@ export class BugComponent
 
     this.priorityFormControl.valueChanges.subscribe((value: string) => {
       this.priorityFormControlErrorMessage = "";
-      if (
-        (this.priorityFormControl.touched || this.priorityFormControl.dirty) &&
-        this.priorityFormControl.errors
-      ) {
-        this.priorityFormControlErrorMessage = Object.keys(
+      if ((this.priorityFormControl.touched || this.priorityFormControl.dirty) &&
           this.priorityFormControl.errors
-        )
+      ) {
+          this.priorityFormControlErrorMessage = Object.keys(this.priorityFormControl.errors)
           .map(c => this.priorityFormControlValidationMessages[c])
           .join(" ");
       }
@@ -179,13 +191,10 @@ export class BugComponent
 
     this.reporterFormControl.valueChanges.subscribe((value: string) => {
       this.reporterFormControlErrorMessage = "";
-      if (
-        (this.reporterFormControl.touched || this.reporterFormControl.dirty) &&
-        this.reporterFormControl.errors
-      ) {
-        this.reporterFormControlErrorMessage = Object.keys(
+      if ((this.reporterFormControl.touched || this.reporterFormControl.dirty) &&
           this.reporterFormControl.errors
-        )
+      ) {
+          this.reporterFormControlErrorMessage = Object.keys(this.reporterFormControl.errors)
           .map(c => this.reporterFormControlValidationMessages[c])
           .join(" ");
       }
@@ -200,13 +209,10 @@ export class BugComponent
 
     this.statusFormControl.valueChanges.subscribe((value: string) => {
       this.statusFormControlErrorMessage = "";
-      if (
-        (this.statusFormControl.touched || this.statusFormControl.dirty) &&
-        this.statusFormControl.errors
-      ) {
-        this.statusFormControlErrorMessage = Object.keys(
+      if ((this.statusFormControl.touched || this.statusFormControl.dirty) &&
           this.statusFormControl.errors
-        )
+      ) {
+          this.statusFormControlErrorMessage = Object.keys(this.statusFormControl.errors)
           .map(c => this.statusFormControlValidationMessages[c])
           .join(" ");
       }
