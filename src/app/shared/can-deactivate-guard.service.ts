@@ -15,7 +15,7 @@ export class CanDeactivateGuard
 
   canDeactivate(component: CanComponentDeactivate) {
     if (!component.canDeactivate()) {
-      return window.confirm("Leave");
+      return window.confirm("Dude !!!!! Are you sure????");
     }
     return true;
   }
