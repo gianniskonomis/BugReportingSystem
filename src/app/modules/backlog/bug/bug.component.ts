@@ -225,8 +225,6 @@ export class BugComponent
             this.cancel();
           }
         );
-      } else {
-        this.model = new BugModel();
       }
     });
   }

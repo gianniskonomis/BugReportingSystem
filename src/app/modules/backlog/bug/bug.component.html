@@ -122,33 +122,37 @@
                     type="text"
                     formControlName="commentReporter"
                     name="commentReporter"
-                    [(ngModel)]="comment.reporter">
-          </div>
-
-          <div class="form-group col-xs-10">
-              <label class="form-control-label">Comment :</label>
-              <textarea class="form-control"
-                        formControlName="commentDescription"
-                        rows="3"
-                        name="commentDescription"
-                        [(ngModel)]="comment.description"></textarea>
-          </div>
-
-          <div class="col-md-2">
-              <button class="btn btn-primary mt-25"
-                      (click)="addComment()">
-                <i class="fa fa-plus"></i>
-              </button>
+                    [(ngModel)]="comment.reporter" />
           </div>
       </div>
 
       <div class="row">
-        <div class="col-xs-12">
-          <app-comments [comments]="model.comments"></app-comments>
+        <div class="form-group col-xs-12">
+            <label class="form-control-label">Comment :</label>
+            <textarea class="form-control"
+                      formControlName="commentDescription"
+                      rows="3"
+                      name="commentDescription"
+                      [(ngModel)]="comment.description"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-primary"
+                    (click)="addComment()">
+              <i class="fa fa-plus"></i>
+            </button>
         </div>
       </div>
 
     </form>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <app-comments [comments]="model.comments"></app-comments>
+      </div>
+    </div>
 
   </div>
 
