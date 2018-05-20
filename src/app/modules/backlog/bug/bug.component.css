@@ -10,7 +10,6 @@ button {
 }
 
 .form-body {
-  padding: 15px;
   float: left;
   width: 100%;
 }
@@ -18,3 +17,9 @@ button {
 .mt-25 {
   margin-top: 25px;
 }
+
+.btn,
+.form-control {
+  border-radius: 0;
+}
+

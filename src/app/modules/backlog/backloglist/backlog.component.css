@@ -1,13 +1,17 @@
 button {
+  border-radius: 0;
   transition: all .2s ease;
   -webkit-transition: all .2s ease;
   -o-transition: all .2s ease;
   -moz-transition: all .2s ease;
-
 }
 
 .add-bug {
   margin: 20px 0 20px 0;
+}
+
+.add-bug:hover {
+  cursor: pointer;
 }
 
 .backlog th {
@@ -27,4 +31,12 @@ button {
 .backlog th i {
   padding: 3px;
   font-weight: bolder;
+}
+
+.pl-20 {
+  padding-left: 20px;
+}
+
+.pr-20 {
+  padding-right: 20px;
 }
