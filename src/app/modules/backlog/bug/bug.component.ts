@@ -128,6 +128,7 @@ export class BugComponent
 
   formSubmit(bug: FormGroup, comment: FormGroup) {
     if (!bug.valid || !comment.valid) {
+      this.toastr.warning(`You have invalid fields in your form`);
       return;
     }
 

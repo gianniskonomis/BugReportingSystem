@@ -5,7 +5,12 @@ button {
   -moz-transition: all .2s ease;
 }
 
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 50px;
+}
+
 .submitBug {
   margin-left: 10px;
 }
-
