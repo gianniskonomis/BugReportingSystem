@@ -1,15 +1,25 @@
-<app-pager (pageChanged)="onPageChanged($event)" [page]="page" [pageSize]="pageSize"></app-pager>
+
+<div class="row">
+  <div class="col-md-12 pt-10 pb-10">
+    
+    <!-- Pager -->
+    <app-pager (pageChanged)="onPageChanged($event)" [page]="page" [pageSize]="pageSize"></app-pager>
+    <!-- /Pager -->
+
+  </div>
+</div>
+
 <div class="row">
   <div class="col-xs-12">
-    <button class="btn btn-primary add-bug" [routerLink]="['/bug-add']">
-      <i class="fa fa-plus"></i> 
-      New Bug
-    </button>
+
     <div class="table-responsive">
-      <table class="table table-bordered table-hover table-striped backlog">
+      <table class="table table-bordered table-hover table-striped backlog blue no-borders">
         <thead>
           <tr>
-            <th>
+            <th class="vertical-middle text-center">
+              <button class="btn btn-success btn-sm" [routerLink]="['/bug-add']">
+                  <i class="fa fa-plus text-white"></i>
+              </button>
             </th>
             <th class="col-xs-1" (click)="getBugs('priority')" title="Priority">
               <span class="text-center">
@@ -77,12 +87,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let bug of bugs">
-            <td class="col-xs-2">
-              <button class="btn btn-primary add-bug" [routerLink]="['/bug-edit',bug.id]">
-                <i class="fa fa-pencil"></i></button>
-
-              <button class="btn btn-danger" (click)="removeBug(bug.id)">
-                  <i class="fa fa-times"></i></button>
+            <td class="col-xs-1 vertical-middle text-center">
+              <div class="btn-group">
+                <button class="btn btn-default btn-sm" [routerLink]="['/bug-edit',bug.id]">
+                  <i class="fa fa-pencil soft-black"></i>
+                </button>
+                <button class="btn btn-default btn-sm" (click)="removeBug(bug.id)">
+                    <i class="fa fa-times soft-black"></i>
+                </button>
+              </div>
             </td>
             <td class="col-xs-1">{{bug.priority}}</td>
             <td class="col-xs-2">{{bug.title}}</td>

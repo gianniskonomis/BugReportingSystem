@@ -21,7 +21,8 @@
       "styles": [
         "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss",
         "../node_modules/font-awesome/scss/font-awesome.scss",
-        "../node_modules/ngx-toastr/toastr.css"
+        "../node_modules/ngx-toastr/toastr.css",
+        "assets/css/styles.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

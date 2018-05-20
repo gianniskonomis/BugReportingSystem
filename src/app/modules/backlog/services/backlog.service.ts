@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { BugModel } from "../bug/bug.model";
+import { environment } from "../../../../environments/environment";
 
 @Injectable()
 export class BacklogService {
-
-  private bugEndPoint = "http://localhost:3001/bugs";
+  private bugEndPoint = environment.bugEndPoint;
 
   constructor(private http: HttpClient) { }
 
