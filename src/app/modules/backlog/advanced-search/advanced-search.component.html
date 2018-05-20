@@ -1,0 +1,71 @@
+<!-- &title=bug&priority=1&reporter=QA&status=Done -->
+
+
+  <form class="form">
+
+    <div class="form-body">
+
+      <div class="row">
+        
+        <!-- Priority -->
+        <div class="form-group col-xs-2">
+            <select class="form-control" 
+                    placeholder="Priority" 
+                    type="text" 
+                    formControlName="Priority"
+                    name="Priority" 
+                    [(ngModel)]="model.priority">
+
+              <option class="text-muted" [ngValue]="null" disabled selected hidden>Priority</option>
+              <option *ngFor="let priority of priorityOptions">
+                {{priority}}
+              </option>
+          </select>
+        </div>
+        <!-- /Priority -->
+
+        <!-- Title -->
+        <div class="form-group col-xs-3">
+          <input class="form-control" 
+                 placeholder="Title" 
+                 type="text" 
+                 formControlName="title"
+                 name="title" 
+                 [(ngModel)]="model.title">
+        </div>
+        <!-- /Title -->
+
+        <!-- Reporter -->
+        <div class="form-group col-xs-3">
+          <select class="form-control" 
+                  placeholder="Reporter" 
+                  type="text" 
+                  formControlName="Reporter"
+                  name="Reporter" 
+                  [(ngModel)]="model.reporter">
+        </select>
+        </div>
+        <!-- /Reporter -->
+
+        <!-- Status -->
+        <div class="form-group col-xs-3">
+          <select class="form-control" 
+                  placeholder="Status" 
+                  type="text" 
+                  formControlName="Status" 
+                  name="Status" 
+                  [(ngModel)]="model.status">
+          </select>
+        </div>
+        <!-- Status -->
+
+        <div class="form-group col-xs-1">
+          <button class="btn btn-default">
+            <i class="fa fa-search"></i> 
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </form>

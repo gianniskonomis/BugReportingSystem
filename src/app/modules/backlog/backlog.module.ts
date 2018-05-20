@@ -8,6 +8,7 @@ import { BacklogService } from "./services/backlog.service";
 import { CommentsComponent } from "./comments/comments.component";
 import { PagerComponent } from "../../shared/pager/pager.component";
 import { CanDeactivateGuard } from "../../shared/can-deactivate-guard.service";
+import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
 
 export const routes: Routes = [
   { path: "backlog", component: BacklogComponent },
@@ -18,7 +19,7 @@ export const routes: Routes = [
 @NgModule({
   imports: [SharedModule, RouterModule.forChild(routes)],
   providers: [BacklogService, CanDeactivateGuard],
-  declarations: [BacklogComponent, BugComponent, CommentsComponent],
+  declarations: [BacklogComponent, BugComponent, CommentsComponent, AdvancedSearchComponent],
   exports: []
 })
 export class BackLogModule {}
