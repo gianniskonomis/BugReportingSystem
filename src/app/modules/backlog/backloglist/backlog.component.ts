@@ -27,7 +27,7 @@ export class BacklogComponent implements OnInit {
     this.sortBy = "title";
     this.isSortAsc = true;
     this.page = 0;
-    this.size = 3;
+    this.size = 10;
     this.getBugs(this.sortBy);
   }
 
