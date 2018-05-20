@@ -5,23 +5,28 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./advanced-search.component.css"]
 })
 export class AdvancedSearchComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  @Output() initiateAdvancedSearch = new EventEmitter;
+  @Output() initiateAdvancedSearch = new EventEmitter();
 
   // Select Options
   priorityOptions = [1, 2, 3];
   reporterOptions = ["QA", "PO", "DEV"];
   statusOptions = ["Ready for test", "Done", "Rejected"];
 
-  ngOnInit() {
-  }
-  
-  executeSearch(params) {
-    if (!params) { return; }
+  priority: string;
+  reporter: string;
+  status: string;
+  title: string;
 
-    this.initiateAdvancedSearch.emit(params);
-  }
+  ngOnInit() {}
 
+  executeSearch() {
+    this.initiateAdvancedSearch.emit({
+      priority: this.priority,
+      reporter: this.reporter,
+      title: this.title,
+      status: this.status
+    });
+  }
 }

@@ -6,14 +6,13 @@
     <div class="form-body">
 
       <div class="row">
-        
+
         <!-- Priority -->
         <div class="form-group col-xs-2">
-            <select class="form-control" 
-                    placeholder="Priority" 
-                    type="text" 
-                    formControlName="Priority"
-                    name="Priority" 
+            <select class="form-control"
+                    placeholder="Priority"
+                    type="text"
+                    name="Priority"
                     [(ngModel)]="priority">
 
               <option class="text-muted" [ngValue]="null" disabled selected hidden>Priority</option>
@@ -26,22 +25,20 @@
 
         <!-- Title -->
         <div class="form-group col-xs-3">
-          <input class="form-control" 
-                 placeholder="Title" 
-                 type="text" 
-                 formControlName="title"
-                 name="title" 
+          <input class="form-control"
+                 placeholder="Title"
+                 type="text"
+                 name="title"
                  [(ngModel)]="title">
         </div>
         <!-- /Title -->
 
         <!-- Reporter -->
         <div class="form-group col-xs-3">
-          <select class="form-control" 
-                  placeholder="Reporter" 
-                  type="text" 
-                  formControlName="Reporter"
-                  name="Reporter" 
+          <select class="form-control"
+                  placeholder="Reporter"
+                  type="text"
+                  name="Reporter"
                   [(ngModel)]="reporter">
         </select>
         </div>
@@ -49,11 +46,10 @@
 
         <!-- Status -->
         <div class="form-group col-xs-3">
-          <select class="form-control" 
-                  placeholder="Status" 
-                  type="text" 
-                  formControlName="Status" 
-                  name="Status" 
+          <select class="form-control"
+                  placeholder="Status"
+                  type="text"
+                  name="Status"
                   [(ngModel)]="status">
           </select>
         </div>
@@ -61,13 +57,8 @@
 
         <div class="form-group col-xs-1">
           <button class="btn btn-default btn-sm"
-                  (click)="executeSearch({
-                              priority: priority,
-                              title: title,
-                              reporter: reporter,
-                              status: status
-                          })">
-            <i class="fa fa-search"></i> 
+                  (click)="executeSearch()">
+            <i class="fa fa-search"></i>
           </button>
         </div>
 

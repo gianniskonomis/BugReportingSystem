@@ -73,7 +73,6 @@ export class BacklogComponent implements OnInit {
     this.priorityFilter = params.priority;
     this.reporterFilter = params.reporter;
     this.statusFilter = params.status;
-
     this.resolveBugs();
   }
 
