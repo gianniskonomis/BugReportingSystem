@@ -1,4 +1,4 @@
-import { Comment } from '../comments/comment.model';
+import { Comment } from "../comments/comment.model";
 
 export class Bug {
   constructor(public title: string,

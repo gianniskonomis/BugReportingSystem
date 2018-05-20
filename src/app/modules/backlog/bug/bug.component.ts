@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -7,21 +7,35 @@ import {
 } from "@angular/forms";
 import { NgForm } from "@angular/forms";
 import { Bug, BugModel } from "./bug.model";
-import { ActivatedRoute, Router } from "@angular/router";
+import {
+  ActivatedRoute,
+  Router,
+  CanDeactivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from "@angular/router";
 import { BacklogService } from "../services/backlog.service";
 import { Subscription } from "rxjs/Subscription";
 import { Comment } from "../comments/comment.model";
 import { ToastrService } from "ngx-toastr";
+import { CanComponentDeactivate } from "../../../shared/can-deactivate-guard.service";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: "app-bug",
   templateUrl: "./bug.component.html",
   styleUrls: ["./bug.component.css"]
 })
-export class BugComponent implements OnInit {
+
+export class BugComponent
+  implements OnInit, CanComponentDeactivate {
+
+  @Output() comments: Comment[];
+
   model: BugModel;
   comment: Comment;
   bugForm: FormGroup;
+  commentForm: FormGroup;
   sub: Subscription;
 
   // title
@@ -36,21 +50,27 @@ export class BugComponent implements OnInit {
   };
 
   // description
-  descriptionFormControl = new FormControl("", Validators.required);
+  descriptionFormControl = new FormControl("",
+   Validators.required
+  );
   descriptionFormControlErrorMessage = "";
   descriptionFormControlValidationMessages = {
     required: "The description is required"
   };
 
   // priority
-  priorityFormControl = new FormControl("", Validators.required);
+  priorityFormControl = new FormControl("",
+    Validators.required
+  );
   priorityFormControlErrorMessage = "";
   priorityFormControlValidationMessages = {
     required: "The priority is required"
   };
 
   // reporter
-  reporterFormControl = new FormControl("", Validators.required);
+  reporterFormControl = new FormControl("",
+    Validators.required
+  );
   reporterFormControlErrorMessage = "";
   reporterFormControlValidationMessages = {
     required: "The reporter is required"
@@ -81,8 +101,22 @@ export class BugComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    return !this.bugForm.dirty;
+  }
+
   addComment() {
-    this.model.comments.push(this.comment);
+    if (!this.comment.reporter || !this.comment.description) {
+      this.toastr.warning(
+        `You didn't add a comment`
+      );
+      return;
+    } else {
+      this.model.comments.push(this.comment);
+      this.comments = this.model.comments;
+      this.comment.reporter = undefined;
+      this.comment.description = undefined;
+    }
   }
 
   cancel() {
@@ -109,6 +143,8 @@ export class BugComponent implements OnInit {
       priority: this.priorityFormControl,
       reporter: this.reporterFormControl,
       status: this.statusFormControl,
+    });
+    this.commentForm = new FormGroup({
       commentReporter: this.commentReporterFormControl,
       commentDescription: this.commentDescriptionFormControl
     });
@@ -116,13 +152,10 @@ export class BugComponent implements OnInit {
     // Validations
     this.titleFormControl.valueChanges.subscribe((value: string) => {
       this.titleFormControlErrorMessage = "";
-      if (
-        (this.titleFormControl.touched || this.titleFormControl.dirty) &&
-        this.titleFormControl.errors
-      ) {
-        this.titleFormControlErrorMessage = Object.keys(
+      if ((this.titleFormControl.touched || this.titleFormControl.dirty) &&
           this.titleFormControl.errors
-        )
+      ) {
+          this.titleFormControlErrorMessage = Object.keys(this.titleFormControl.errors)
           .map(c => this.titleFormControlValidationMessages[c])
           .join(" ");
       }
@@ -130,14 +163,10 @@ export class BugComponent implements OnInit {
 
     this.descriptionFormControl.valueChanges.subscribe((value: string) => {
       this.descriptionFormControlErrorMessage = "";
-      if (
-        (this.descriptionFormControl.touched ||
-          this.descriptionFormControl.dirty) &&
-        this.descriptionFormControl.errors
-      ) {
-        this.descriptionFormControlErrorMessage = Object.keys(
+      if ((this.descriptionFormControl.touched || this.descriptionFormControl.dirty) &&
           this.descriptionFormControl.errors
-        )
+      ) {
+          this.descriptionFormControlErrorMessage = Object.keys(this.descriptionFormControl.errors)
           .map(c => this.descriptionFormControlValidationMessages[c])
           .join(" ");
       }
@@ -145,13 +174,10 @@ export class BugComponent implements OnInit {
 
     this.priorityFormControl.valueChanges.subscribe((value: string) => {
       this.priorityFormControlErrorMessage = "";
-      if (
-        (this.priorityFormControl.touched || this.priorityFormControl.dirty) &&
-        this.priorityFormControl.errors
-      ) {
-        this.priorityFormControlErrorMessage = Object.keys(
+      if ((this.priorityFormControl.touched || this.priorityFormControl.dirty) &&
           this.priorityFormControl.errors
-        )
+      ) {
+          this.priorityFormControlErrorMessage = Object.keys(this.priorityFormControl.errors)
           .map(c => this.priorityFormControlValidationMessages[c])
           .join(" ");
       }
@@ -159,13 +185,10 @@ export class BugComponent implements OnInit {
 
     this.reporterFormControl.valueChanges.subscribe((value: string) => {
       this.reporterFormControlErrorMessage = "";
-      if (
-        (this.reporterFormControl.touched || this.reporterFormControl.dirty) &&
-        this.reporterFormControl.errors
-      ) {
-        this.reporterFormControlErrorMessage = Object.keys(
+      if ((this.reporterFormControl.touched || this.reporterFormControl.dirty) &&
           this.reporterFormControl.errors
-        )
+      ) {
+          this.reporterFormControlErrorMessage = Object.keys(this.reporterFormControl.errors)
           .map(c => this.reporterFormControlValidationMessages[c])
           .join(" ");
       }
@@ -180,13 +203,10 @@ export class BugComponent implements OnInit {
 
     this.statusFormControl.valueChanges.subscribe((value: string) => {
       this.statusFormControlErrorMessage = "";
-      if (
-        (this.statusFormControl.touched || this.statusFormControl.dirty) &&
-        this.statusFormControl.errors
-      ) {
-        this.statusFormControlErrorMessage = Object.keys(
+      if ((this.statusFormControl.touched || this.statusFormControl.dirty) &&
           this.statusFormControl.errors
-        )
+      ) {
+          this.statusFormControlErrorMessage = Object.keys(this.statusFormControl.errors)
           .map(c => this.statusFormControlValidationMessages[c])
           .join(" ");
       }
@@ -195,14 +215,17 @@ export class BugComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       const id = params["id"];
       if (id) {
-        this.backlogService.get(id).subscribe((bug: Bug) => {
+        this.backlogService.get(id).subscribe(
+          (bug: Bug) => {
             this.model = bug;
-        }, err => {
-          this.toastr.error(
-            `Bug with id '${id}' not found, returning to list`
-          );
-          this.cancel();
-        });
+          },
+          err => {
+            this.toastr.error(
+              `Bug with id '${id}' not found, returning to list`
+            );
+            this.cancel();
+          }
+        );
       } else {
         this.model = new BugModel();
       }

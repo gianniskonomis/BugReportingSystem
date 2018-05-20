@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  bugEndPoint: "http://localhost:3001/bugs"
 };

@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bug, BugModel } from '../bug/bug.model';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Bug, BugModel } from "../bug/bug.model";
+import { environment } from "../../../../environments/environment";
 
 @Injectable()
 export class BacklogService {
+  private bugEndPoint = environment.bugEndPoint;
 
-  private bugEndPoint = 'http://localhost:3001/bugs';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBugs(
     sortBy: string,
@@ -16,12 +16,12 @@ export class BacklogService {
     page: number = 0,
     size: number = 10
   ): Observable<Array<Bug>> {
-    const sortType = isSortAsc ? 'asc' : 'desc';
+    const sortType = isSortAsc ? "asc" : "desc";
 
     let params = new HttpParams();
-    params = params.append('sort', `${sortBy},${sortType}`);
-    params = params.append('page', page.toString());
-    params = params.append('size', size.toString());
+    params = params.append("sort", `${sortBy},${sortType}`);
+    params = params.append("page", page.toString());
+    params = params.append("size", size.toString());
 
     return this.http.get<Array<Bug>>(this.bugEndPoint, { params: params });
   }
