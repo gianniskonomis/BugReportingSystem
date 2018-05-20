@@ -6,7 +6,7 @@ import {
   AbstractControl
 } from "@angular/forms";
 import { NgForm } from "@angular/forms";
-import { Bug, BugModel } from "./bug.model";
+import { BugModel } from "./bug.model";
 import {
   ActivatedRoute,
   Router,
@@ -113,7 +113,6 @@ export class BugComponent
       return;
     } else {
       this.model.comments.push(this.comment);
-      this.comments = this.model.comments;
       this.comment.reporter = undefined;
       this.comment.description = undefined;
     }
@@ -123,8 +122,8 @@ export class BugComponent
     this.router.navigate(["/backlog"]);
   }
 
-  formSubmit(form: FormGroup) {
-    if (!form.valid) {
+  formSubmit(bug: FormGroup, comment: FormGroup) {
+    if (!bug.valid || !comment.valid) {
       return;
     }
 
@@ -216,7 +215,7 @@ export class BugComponent
       const id = params["id"];
       if (id) {
         this.backlogService.get(id).subscribe(
-          (bug: Bug) => {
+          (bug: BugModel) => {
             this.model = bug;
           },
           err => {
