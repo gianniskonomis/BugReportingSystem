@@ -119,6 +119,8 @@ export class BugComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.model = new BugModel();
+    this.comment = new Comment();
     this.bugForm = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
@@ -205,9 +207,6 @@ export class BugComponent implements OnInit {
           );
           this.cancel();
         });
-      } else {
-        this.model = new BugModel();
-        this.comment = new Comment();
       }
     });
   }
