@@ -7,18 +7,28 @@ import {
 } from "@angular/forms";
 import { NgForm } from "@angular/forms";
 import { Bug, BugModel } from "./bug.model";
-import { ActivatedRoute, Router } from "@angular/router";
+import {
+  ActivatedRoute,
+  Router,
+  CanDeactivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from "@angular/router";
 import { BacklogService } from "../services/backlog.service";
 import { Subscription } from "rxjs/Subscription";
 import { Comment } from "../comments/comment.model";
 import { ToastrService } from "ngx-toastr";
+import { CanComponentDeactivate } from "../../../shared/can-deactivate-guard.service";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: "app-bug",
   templateUrl: "./bug.component.html",
   styleUrls: ["./bug.component.css"]
 })
-export class BugComponent implements OnInit {
+export class BugComponent
+  implements OnInit, CanDeactivate<CanComponentDeactivate> {
+
   model: BugModel;
   comment: Comment;
   bugForm: FormGroup;
@@ -81,11 +91,21 @@ export class BugComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  canDeactivate(
+    component: CanComponentDeactivate,
+    currentRoute: ActivatedRouteSnapshot,
+    currentState: RouterStateSnapshot,
+    nextState?: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> {
+    return this.bugForm.valid;
+  }
+
   addComment() {
     this.model.comments.push(this.comment);
   }
 
   cancel() {
+    debugger;
     this.router.navigate(["/backlog"]);
   }
 
@@ -95,7 +115,7 @@ export class BugComponent implements OnInit {
     }
 
     this.backlogService.save(this.model).subscribe(response => {
-      this.toastr.success(`Bug Saved`);
+      //this.toastr.success(`Bug Saved`);
       this.router.navigate(["/backlog"]);
     });
   }
@@ -195,14 +215,17 @@ export class BugComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       const id = params["id"];
       if (id) {
-        this.backlogService.get(id).subscribe((bug: Bug) => {
+        this.backlogService.get(id).subscribe(
+          (bug: Bug) => {
             this.model = bug;
-        }, err => {
-          this.toastr.error(
-            `Bug with id '${id}' not found, returning to list`
-          );
-          this.cancel();
-        });
+          },
+          err => {
+            this.toastr.error(
+              `Bug with id '${id}' not found, returning to list`
+            );
+            this.cancel();
+          }
+        );
       } else {
         this.model = new BugModel();
       }

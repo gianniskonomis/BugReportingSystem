@@ -6,11 +6,12 @@ import { BugComponent } from "./bug/bug.component";
 import { BacklogService } from "./services/backlog.service";
 import { CommentsComponent } from "./comments/comments.component";
 import { PagerComponent } from "../../shared/pager/pager.component";
+import { CanDeactivateGuard } from "../../shared/can-deactivate-guard.service";
 
 export const routes: Routes = [
   { path: "backlog", component: BacklogComponent },
-  { path: "bug-add", component: BugComponent },
-  { path: "bug-edit/:id", component: BugComponent }
+  { path: "bug-add", component: BugComponent, canDeactivate: [CanDeactivateGuard] },
+  { path: "bug-edit/:id", component: BugComponent, canDeactivate: [CanDeactivateGuard] }
 ];
 
 @NgModule({
