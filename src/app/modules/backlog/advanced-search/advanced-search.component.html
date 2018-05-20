@@ -15,7 +15,7 @@
                     name="Priority"
                     [(ngModel)]="priority">
 
-              <option class="text-muted" [ngValue]="null" disabled selected hidden>Priority</option>
+              <option [ngValue]="null"></option>
               <option *ngFor="let priority of priorityOptions">
                 {{priority}}
               </option>
@@ -41,6 +41,10 @@
                   type="text"
                   name="Reporter"
                   [(ngModel)]="reporter">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let reporter of reporterOptions">
+                {{reporter}}
+              </option>
         </select>
         </div>
         <!-- /Reporter -->
@@ -52,6 +56,11 @@
                   type="text"
                   name="Status"
                   [(ngModel)]="status">
+            
+            <option [ngValue]="null"></option>
+            <option *ngFor="let status of statusOptions">
+              {{status}}
+            </option>
           </select>
         </div>
         <!-- Status -->
