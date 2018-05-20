@@ -112,7 +112,7 @@ export class BugComponent
       );
       return;
     } else {
-      this.model.comments.push(this.comment);
+      this.model.comments.push(new Comment(this.comment.reporter, this.comment.description));
       this.comment.reporter = undefined;
       this.comment.description = undefined;
     }
