@@ -1,14 +1,14 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { BacklogService } from './backlog.service';
+import { TestBed, inject } from "@angular/core/testing";
+import { BacklogService } from "./backlog.service";
 
-describe('BacklogService', () => {
+describe("BacklogService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [BacklogService]
     });
   });
 
-  it('should be created', inject([BacklogService], (service: BacklogService) => {
+  it("should be created", inject([BacklogService], (service: BacklogService) => {
     expect(service).toBeTruthy();
   }));
 });

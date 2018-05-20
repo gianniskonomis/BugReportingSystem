@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bug, BugModel } from '../bug/bug.model';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { BugModel } from "../bug/bug.model";
 
 @Injectable()
 export class BacklogService {
 
-  private bugEndPoint = 'http://localhost:3001/bugs';
+  private bugEndPoint = "http://localhost:3001/bugs";
 
   constructor(private http: HttpClient) { }
 
@@ -15,23 +15,23 @@ export class BacklogService {
     isSortAsc: boolean,
     page: number = 0,
     size: number = 10
-  ): Observable<Array<Bug>> {
-    const sortType = isSortAsc ? 'asc' : 'desc';
+  ): Observable<Array<BugModel>> {
+    const sortType = isSortAsc ? "asc" : "desc";
 
     let params = new HttpParams();
-    params = params.append('sort', `${sortBy},${sortType}`);
-    params = params.append('page', page.toString());
-    params = params.append('size', size.toString());
+    params = params.append("sort", `${sortBy},${sortType}`);
+    params = params.append("page", page.toString());
+    params = params.append("size", size.toString());
 
-    return this.http.get<Array<Bug>>(this.bugEndPoint, { params: params });
+    return this.http.get<Array<BugModel>>(this.bugEndPoint, { params: params });
   }
 
-  get(id: string): Observable<Bug> {
-    return this.http.get<Bug>(`${this.bugEndPoint}/${id}`);
+  get(id: string): Observable<BugModel> {
+    return this.http.get<BugModel>(`${this.bugEndPoint}/${id}`);
   }
 
-  delete(id: string): Observable<Bug> {
-    return this.http.delete<Bug>(`${this.bugEndPoint}/${id}`);
+  delete(id: string): Observable<BugModel> {
+    return this.http.delete<BugModel>(`${this.bugEndPoint}/${id}`);
   }
 
   save(model: any): Observable<any> {
