@@ -1,14 +1,29 @@
 
 <div class="row">
   <div class="col-md-12 pt-10 pb-10">
-    
-    <!-- Pager -->
-    <app-pager (pageChanged)="onPageChanged($event)" 
-               (pageSizeChanged)="onPageSizeChanged($event)"
-               [page]="page" 
-               [pageSize]="pageSize">
-    </app-pager>
-    <!-- /Pager -->
+
+    <div class="row">
+
+      <!-- Advanced Search -->
+      <div class="col-xs-9">
+        <app-advanced-search (initiateAdvancedSearch)="onAdvancedSearchStarted($event)">
+
+        </app-advanced-search>
+      </div>
+      <!-- /Advanced Search -->
+
+      <!-- Pager -->
+      <div class="col-xs-3">
+        <app-pager (pageChanged)="onPageChanged($event)"
+                   (pageSizeChanged)="onPageSizeChanged($event)"
+                   [page]="page"
+                   [pageSize]="size">
+        </app-pager>
+      </div>
+      <!-- /Pager -->
+
+    </div>
+
 
   </div>
 </div>

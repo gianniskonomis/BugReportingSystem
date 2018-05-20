@@ -1,0 +1,78 @@
+<!-- &title=bug&priority=1&reporter=QA&status=Done -->
+
+
+  <form class="form">
+
+    <div class="form-body">
+
+      <div class="row">
+
+        <!-- Priority -->
+        <div class="form-group col-xs-2">
+            <select class="form-control"
+                    placeholder="Priority"
+                    type="text"
+                    name="Priority"
+                    [(ngModel)]="priority">
+
+              <option [ngValue]="null"></option>
+              <option *ngFor="let priority of priorityOptions">
+                {{priority}}
+              </option>
+          </select>
+        </div>
+        <!-- /Priority -->
+
+        <!-- Title -->
+        <div class="form-group col-xs-3">
+          <input class="form-control"
+                 placeholder="Title"
+                 type="text"
+                 name="title"
+                 [(ngModel)]="title">
+        </div>
+        <!-- /Title -->
+
+        <!-- Reporter -->
+
+        <div class="form-group col-xs-3">
+          <select class="form-control"
+                  placeholder="Reporter"
+                  type="text"
+                  name="Reporter"
+                  [(ngModel)]="reporter">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let reporter of reporterOptions">
+                {{reporter}}
+              </option>
+        </select>
+        </div>
+        <!-- /Reporter -->
+
+        <!-- Status -->
+        <div class="form-group col-xs-3">
+          <select class="form-control"
+                  placeholder="Status"
+                  type="text"
+                  name="Status"
+                  [(ngModel)]="status">
+            
+            <option [ngValue]="null"></option>
+            <option *ngFor="let status of statusOptions">
+              {{status}}
+            </option>
+          </select>
+        </div>
+        <!-- Status -->
+
+        <div class="form-group col-xs-1">
+          <button class="btn btn-default btn-sm"
+                  (click)="executeSearch()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
