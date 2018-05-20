@@ -37,6 +37,7 @@ export class BugComponent
   bugForm: FormGroup;
   commentForm: FormGroup;
   sub: Subscription;
+  submitted: boolean;
 
   // title
   titleFormControl = new FormControl("", [
@@ -102,6 +103,9 @@ export class BugComponent
   ) {}
 
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (this.submitted === true) {
+      return true;
+    }
     return !this.bugForm.dirty;
   }
 
@@ -128,6 +132,7 @@ export class BugComponent
     }
 
     this.backlogService.save(this.model).subscribe(response => {
+      this.submitted = true;
       this.toastr.success(`Bug Saved`);
       this.router.navigate(["/backlog"]);
     });
@@ -136,6 +141,7 @@ export class BugComponent
   ngOnInit() {
     this.model = new BugModel();
     this.comment = new Comment(undefined, undefined);
+    this.submitted = false;
     this.bugForm = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
