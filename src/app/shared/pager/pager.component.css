@@ -1,0 +1,11 @@
+.pagination {
+    margin: 0;
+}
+
+.page-size {
+  display: inline-block;
+  height: 29px;
+  width: 50px;
+  margin-top: 1px;
+  padding: 5px;
+}

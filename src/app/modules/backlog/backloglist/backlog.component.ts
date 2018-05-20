@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BacklogService } from "../services/backlog.service";
-import { Bug } from "../bug/bug.model";
+import { BugModel } from "../bug/bug.model";
 import { Observable } from "rxjs/Observable";
 import { Router } from "@angular/router";
 
@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./backlog.component.css"]
 })
 export class BacklogComponent implements OnInit {
-  bugs: Array<Bug>;
+  bugs: Array<BugModel>;
   sortBy: string;
   isSortAsc: boolean;
   page: number;
@@ -46,6 +46,11 @@ export class BacklogComponent implements OnInit {
     } else {
       this.page--;
     }
+    this.resolveBugs();
+  }
+
+  onPageSizeChanged(pageSizeValue){
+    this.size = pageSizeValue;
     this.resolveBugs();
   }
 
